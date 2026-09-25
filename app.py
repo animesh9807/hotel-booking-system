@@ -13,13 +13,13 @@ app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
 ADMIN_USERNAME = os.getenv('ADMIN_USERNAME', 'admin')
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", 'admin123')
 
 # Database configuration
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'demo_password',  # Change this
+    'password': 'animesh',
     'database': 'hotel_booking_db'
 }
 

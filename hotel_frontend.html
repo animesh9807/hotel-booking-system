@@ -72,11 +72,10 @@
                 <table class="min-w-full leading-normal">
                     <thead>
                         <tr>
-                            <th>Room ID</th>
-                            <th>Type</th>
-                            <th>Floor</th>
-                            <th>Price/Night</th>
-                            <th>Status</th>
+                            <th class="w-1/4 text-left px-5 py-3 bg-gray-100 border-b-2 border-gray-200 text-gray-600 font-bold uppercase text-sm">Room Number</th>
+                            <th class="w-1/4 text-left px-5 py-3 bg-gray-100 border-b-2 border-gray-200 text-gray-600 font-bold uppercase text-sm">Type</th>
+                            <th class="w-1/4 text-left px-5 py-3 bg-gray-100 border-b-2 border-gray-200 text-gray-600 font-bold uppercase text-sm">Price/Night</th>
+                            <th class="w-1/4 text-left px-5 py-3 bg-gray-100 border-b-2 border-gray-200 text-gray-600 font-bold uppercase text-sm">Status</th>
                         </tr>
                     </thead>
                     <tbody id="roomsTableBody"></tbody>
@@ -92,12 +91,12 @@
                 <table class="min-w-full leading-normal">
                     <thead>
                         <tr>
-                            <th>Booking ID</th>
-                            <th>Guest</th>
-                            <th>Room</th>
-                            <th>Check-In</th>
-                            <th>Check-Out</th>
-                            <th>Status</th>
+                            <th class="w-1/6 text-left px-5 py-3 bg-gray-100 border-b-2 border-gray-200 text-gray-600 font-bold uppercase text-sm">Booking ID</th>
+                            <th class="w-1/6 text-left px-5 py-3 bg-gray-100 border-b-2 border-gray-200 text-gray-600 font-bold uppercase text-sm">Guest</th>
+                            <th class="w-1/6 text-left px-5 py-3 bg-gray-100 border-b-2 border-gray-200 text-gray-600 font-bold uppercase text-sm">Room</th>
+                            <th class="w-1/6 text-left px-5 py-3 bg-gray-100 border-b-2 border-gray-200 text-gray-600 font-bold uppercase text-sm">Check-In</th>
+                            <th class="w-1/6 text-left px-5 py-3 bg-gray-100 border-b-2 border-gray-200 text-gray-600 font-bold uppercase text-sm">Check-Out</th>
+                            <th class="w-1/6 text-left px-5 py-3 bg-gray-100 border-b-2 border-gray-200 text-gray-600 font-bold uppercase text-sm">Status</th>
                         </tr>
                     </thead>
                     <tbody id="bookedRoomsTableBody"></tbody>
@@ -355,7 +354,7 @@ document.getElementById('adminLogoutBtn').addEventListener('click', async () => 
 
 async function fetchRooms() {
     const tbody = document.getElementById('roomsTableBody');
-    tbody.innerHTML = '<tr><td colspan="5" class="py-4 text-center text-gray-500">Loading rooms...</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="4" class="py-4 text-center text-gray-500">Loading rooms...</td></tr>';
     try {
         const response = await fetch('/api/rooms');
         const payload = await response.json();
@@ -363,7 +362,7 @@ async function fetchRooms() {
 
         cachedRooms = payload.rooms || [];
         if (!cachedRooms.length) {
-            tbody.innerHTML = '<tr><td colspan="5" class="py-4 text-center text-gray-500">No rooms found.</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="4" class="py-4 text-center text-gray-500">No rooms found.</td></tr>';
             populateRoomDropdown();
             return;
         }
@@ -378,7 +377,6 @@ async function fetchRooms() {
                     <td class="px-5 py-3 border-b">${room.room_number}</td>
                     <td class="px-5 py-3 border-b">${room.room_type}</td>
                     <td class="px-5 py-3 border-b">₹${Number(room.price).toFixed(2)}</td>
-                    <td class="px-5 py-3 border-b">${room.availability}</td>
                     <td class="px-5 py-3 border-b">
                         <span class="${statusClass} px-2 py-1 rounded text-xs font-semibold">${room.availability}</span>
                     </td>
@@ -388,7 +386,7 @@ async function fetchRooms() {
         populateRoomDropdown();
     } catch (err) {
         console.error(err);
-        tbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-red-600">Failed to load rooms: ${err.message}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-red-600">Failed to load rooms: ${err.message}</td></tr>`;
     }
 }
 
